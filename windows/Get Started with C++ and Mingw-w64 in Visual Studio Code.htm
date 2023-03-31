@@ -1,0 +1,510 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!DOCTYPE html>
+<html platform="win" dir="ltr" lang="pt-BR"><head>
+  <title id="reader-title">Get Started with C++ and Mingw-w64 in Visual Studio Code</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *; object-src 'none'">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReaderPocket.css" type="text/css">
+  <link rel="localization" href="toolkit/about/aboutReader.ftl">
+  <link rel="localization" href="browser/branding/brandings.ftl">
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><link rel="shortcut icon" href="https://code.visualstudio.com/favicon.ico"></head>
+
+<body class="light sans-serif loaded" style="--font-size: 20px; --content-width: 30em;">
+  <div class="top-anchor"></div>
+
+  <div id="toolbar" class="toolbar-container">
+    <div class="toolbar reader-toolbar">
+      <div class="reader-controls" articledir="ltr">
+        <button class="close-button toolbar-button" aria-labelledby="toolbar-close" data-telemetry-id="reader-close">
+          <span class="hover-label" id="toolbar-close" data-l10n-id="about-reader-toolbar-close">Fechar leitor</span>
+        </button>
+        <ul class="dropdown style-dropdown">
+          <li>
+            <button class="dropdown-toggle toolbar-button style-button" aria-labelledby="toolbar-type-controls" data-telemetry-id="reader-type-controls">
+              <span class="hover-label" id="toolbar-type-controls" data-l10n-id="about-reader-toolbar-type-controls">Controle de fontes</span>
+            </button>
+          </li>
+          <li class="dropdown-popup">
+            <div class="dropdown-arrow"></div>
+            <div class="font-type-buttons radiorow"><input id="radio-itemsans-serif-button" type="radio" class="radio-button" name="font-type" checked="checked"><label for="radio-itemsans-serif-button" class="sans-serif-button" data-l10n-id="about-reader-font-type-sans-serif" checked="true">Sem serifa</label><input id="radio-itemserif-button" type="radio" class="radio-button" name="font-type"><label for="radio-itemserif-button" class="serif-button" data-l10n-id="about-reader-font-type-serif">Com serifa</label></div>
+            <div class="font-size-buttons buttonrow">
+              <button class="minus-button" data-l10n-id="about-reader-toolbar-minus" title="Diminuir tamanho da fonte"></button>
+              <span class="font-size-value">5</span>
+              <button class="plus-button" data-l10n-id="about-reader-toolbar-plus" title="Aumentar tamanho da fonte"></button>
+            </div>
+            <div class="content-width-buttons buttonrow">
+               <button class="content-width-minus-button" data-l10n-id="about-reader-toolbar-contentwidthminus" title="Diminuir largura do conteúdo"></button>
+               <span class="content-width-value">3</span>
+               <button class="content-width-plus-button" data-l10n-id="about-reader-toolbar-contentwidthplus" title="Aumentar largura do conteúdo"></button>
+            </div>
+            <div class="line-height-buttons buttonrow">
+                <button class="line-height-minus-button" data-l10n-id="about-reader-toolbar-lineheightminus" title="Diminuir altura da linha"></button>
+                <span class="line-height-value">4</span>
+                <button class="line-height-plus-button" data-l10n-id="about-reader-toolbar-lineheightplus" title="Aumentar altura da linha"></button>
+            </div>
+            <div class="color-scheme-buttons radiorow"><input id="radio-itemlight-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemlight-button" class="light-button" data-l10n-id="about-reader-color-scheme-light" title="Esquema de cores claro">Claro</label><input id="radio-itemdark-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemdark-button" class="dark-button" data-l10n-id="about-reader-color-scheme-dark" title="Esquema de cores escuro">Escuro</label><input id="radio-itemsepia-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemsepia-button" class="sepia-button" data-l10n-id="about-reader-color-scheme-sepia" title="Esquema de cores sépia">Sépia</label><input id="radio-itemauto-button" type="radio" class="radio-button" name="color-scheme" checked="checked"><label for="radio-itemauto-button" class="auto-button" data-l10n-id="about-reader-color-scheme-auto" checked="true" title="Esquema de cores automático">Automático</label></div>
+          </li>
+        </ul>
+      <ul class="dropdown narrate-dropdown"><li><button class="dropdown-toggle toolbar-button narrate-toggle" data-telemetry-id="reader-listen" aria-label="Escutar (N)"><span class="hover-label">Escutar (N)</span></button></li><li class="dropdown-popup"><div class="narrate-row narrate-control"><button class="narrate-skip-previous" disabled="disabled" title="Voltar"></button><button class="narrate-start-stop" title="Iniciar (N)"></button><button class="narrate-skip-next" disabled="disabled" title="Avançar"></button></div><div class="narrate-row narrate-rate"><input class="narrate-rate-input" value="0" step="5" max="100" min="-100" type="range" title="Velocidade"></div><div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voz:</span> <span class="current-voice">Padrão</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Padrão</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div><div class="dropdown-arrow"></div></li></ul><button data-buttonid="pocket-button" data-telemetry-id="reader-save-to-pocket" class="toolbar-button pocket-button" aria-labelledby="label-pocket-button" style="background-image: url(&quot;chrome://global/skin/icons/pocket.svg&quot;);"><span class="hover-label" id="label-pocket-button" data-l10n-id="about-reader-toolbar-savetopocket">Salvar no Pocket</span></button></div>
+    </div>
+  </div>
+
+  <div class="container" style="--line-height: 1.6em;" dir="ltr" lang="en">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://code.visualstudio.com/docs/cpp/config-mingw">code.visualstudio.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Get Started with C++ and Mingw-w64 in Visual Studio Code</h1>
+      <div class="credits reader-credits"></div>
+      <div class="meta-data">
+        <div class="reader-estimated-time" data-l10n-args="{&quot;range&quot;:&quot;17–21&quot;,&quot;rangePlural&quot;:&quot;other&quot;}" data-l10n-id="about-reader-estimated-read-time" dir="ltr">17–21 minutos</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content reader-show-element"><div id="readability-page-1" class="page"><div>
+            
+            <h2>Using GCC with MinGW</h2>
+<p>In this tutorial, you configure Visual Studio Code to use the GCC C++ compiler (g++) and GDB debugger from <a href="http://mingw-w64.org/" target="_blank">mingw-w64</a> to create programs that run on Windows.</p>
+<p>After configuring VS Code, you will compile and debug a simple Hello 
+World program in VS Code. This tutorial does not teach you about GCC, 
+GDB, Mingw-w64, or the C++ language. For those subjects, there are many 
+good resources available on the Web.</p>
+<p>If you have any problems, feel free to file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues" target="_blank">VS Code documentation repository</a>.</p>
+<h2 id="_prerequisites" data-needslink="_prerequisites"><a href="#_prerequisites">Prerequisites</a></h2>
+<p>To successfully complete this tutorial, you must do the following steps:</p>
+<ol>
+<li>
+<p>Install <a href="https://code.visualstudio.com/download">Visual Studio Code</a>.</p>
+</li>
+<li>
+<p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" target="_blank">C/C++ extension for VS Code</a>. You can install the C/C++ extension by searching for 'c++' in the Extensions view (<span data-commandid="workbench.view.extensions" data-osx="⇧⌘X" data-win="Ctrl+Shift+X" data-linux="Ctrl+Shift+X" title="macOS: ⇧⌘X, Linux: Ctrl+Shift+X">Ctrl+Shift+X</span>).</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/cpp-extension.png" alt="C/C++ extension" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+</li>
+<li>
+<p>Get the latest version of Mingw-w64 via <a href="https://www.msys2.org/" target="_blank">MSYS2</a>,
+ which provides up-to-date native builds of GCC, Mingw-w64, and other 
+helpful C++ tools and libraries. You can download the latest installer 
+from the MSYS2 page or use this <a href="https://github.com/msys2/msys2-installer/releases/download/2022-06-03/msys2-x86_64-20220603.exe" target="_blank">link to the installer</a>.</p>
+</li>
+<li>
+<p>Follow the <strong>Installation</strong> instructions on the <a href="https://www.msys2.org/" target="_blank">MSYS2 website</a> to install Mingw-w64. Take care to run each required Start menu and <code>pacman</code> command.</p>
+</li>
+<li>
+<p>Install the Mingw-w64 toolchain (<code>pacman -S --needed base-devel mingw-w64-x86_64-toolchain</code>). Run the <code>pacman</code> command in a MSYS2 terminal. Accept the default to install all the members in the <code>toolchain</code> group.</p>
+</li>
+<li>
+<p>Add the path to your Mingw-w64 <code>bin</code> folder to the Windows <code>PATH</code> environment variable by using the following steps:</p>
+<ol>
+<li>In the Windows search bar, type 'settings' to open your Windows Settings.</li>
+<li>Search for <strong>Edit environment variables for your account</strong>.</li>
+<li>Choose the <code>Path</code> variable in your <strong>User variables</strong> and then select <strong>Edit</strong>.</li>
+<li>Select <strong>New</strong> and add the Mingw-w64 destination folder
+ path to the system path. The exact path depends on which version of 
+Mingw-w64 you have installed and where you installed it. If you used the
+ settings above to install Mingw-w64, then add this to the path: <code>C:\msys64\mingw64\bin</code>.</li>
+<li>Select <strong>OK</strong> to save the updated PATH. You will need to reopen any console windows for the new PATH location to be available.</li>
+</ol>
+</li>
+</ol>
+<h3 id="_check-your-mingw-installation" data-needslink="_check-your-mingw-installation"><a href="#_check-your-mingw-installation">Check your MinGW installation</a></h3>
+<p>To check that your Mingw-w64 tools are correctly installed and available, open a <strong>new</strong> Command Prompt and type:</p>
+<pre><code><span><span>gcc --version</span></span>
+<span><span>g++ --version</span></span>
+<span><span>gdb --version</span></span>
+<span></span></code></pre>
+<ol>
+<li>If you don't see the expected output or <code>g++</code> or <code>gdb</code>
+ is not a recognized command, make sure your PATH entry matches the 
+Mingw-w64 binary location where the compilers are located. If the 
+compilers do not exist at that PATH entry, make sure you followed the 
+instructions on the <a href="https://www.msys2.org/" target="_blank">MSYS2 website</a> to install Mingw-w64.</li>
+<li>If <code>gcc</code> has the correct output but not <code>gdb</code>, then you need to install the packages you are missing from the Mingw-w64 toolset.
+<ul>
+<li>Missing the <code>mingw-w64-gdb</code> package is one cause of the 
+"The value of miDebuggerPath is invalid." message upon attempted 
+compilation if your PATH is correct.</li>
+</ul>
+</li>
+</ol>
+<h2 id="_create-hello-world" data-needslink="_create-hello-world"><a href="#_create-hello-world">Create Hello World</a></h2>
+<p>From a Windows command prompt, create an empty folder called <code>projects</code> where you can place all your VS Code projects. Then create a sub-folder called <code>helloworld</code>, navigate into it, and open VS Code in that folder by entering the following commands:</p>
+<pre><code><span><span>mkdir</span><span> projects</span></span>
+<span><span>cd</span><span> projects</span></span>
+<span><span>mkdir</span><span> helloworld</span></span>
+<span><span>cd</span><span> helloworld</span></span>
+<span><span>code .</span></span>
+<span></span></code></pre>
+<p>The "code ." command opens VS Code in the current working folder, which becomes your "workspace". Accept the <a href="https://code.visualstudio.com/docs/editor/workspace-trust">Workspace Trust</a> dialog by selecting <strong>Yes, I trust the authors</strong> since this is a folder you created.</p>
+<p>As you go through the tutorial, you will see three files created in a <code>.vscode</code> folder in the workspace:</p>
+<ul>
+<li><code>tasks.json</code> (build instructions)</li>
+<li><code>launch.json</code> (debugger settings)</li>
+<li><code>c_cpp_properties.json</code> (compiler path and IntelliSense settings)</li>
+</ul>
+<h3 id="_add-a-source-code-file" data-needslink="_add-a-source-code-file"><a href="#_add-a-source-code-file">Add a source code file</a></h3>
+<p>In the File Explorer title bar, select the <strong>New File</strong> button and name the file <code>helloworld.cpp</code>.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/new-file-button.png" alt="New File title bar button" class="moz-reader-block-img" moz-reader-center="true"></p>
+<h3 id="_add-hello-world-source-code" data-needslink="_add-hello-world-source-code"><a href="#_add-hello-world-source-code">Add hello world source code</a></h3>
+<p>Now paste in this source code:</p>
+<pre><code><span><span>#include</span><span> </span><span>&lt;iostream&gt;</span></span>
+<span><span>#include</span><span> </span><span>&lt;vector&gt;</span></span>
+<span><span>#include</span><span> </span><span>&lt;string&gt;</span></span>
+<span></span>
+<span><span>using</span><span> </span><span>namespace</span><span> </span><span>std</span><span>;</span></span>
+<span></span>
+<span><span>int</span><span> </span><span>main</span><span>()</span></span>
+<span><span>{</span></span>
+<span><span>    vector&lt;string&gt; msg {</span><span>"Hello"</span><span>, </span><span>"C++"</span><span>, </span><span>"World"</span><span>, </span><span>"from"</span><span>, </span><span>"VS Code"</span><span>, </span><span>"and the C++ extension!"</span><span>};</span></span>
+<span></span>
+<span><span>    </span><span>for</span><span> (</span><span>const</span><span> string&amp; word : msg)</span></span>
+<span><span>    {</span></span>
+<span><span>        cout &lt;&lt; word &lt;&lt; </span><span>" "</span><span>;</span></span>
+<span><span>    }</span></span>
+<span><span>    cout &lt;&lt; endl;</span></span>
+<span><span>}</span></span>
+<span></span></code></pre>
+<p>Now press <span data-commandid="workbench.action.files.save" data-osx="⌘S" data-win="Ctrl+S" data-linux="Ctrl+S" title="macOS: ⌘S, Linux: Ctrl+S">Ctrl+S</span> to save the file. Notice how the file you just added appears in the <strong>File Explorer</strong> view (<span data-commandid="workbench.view.explorer" data-osx="⇧⌘E" data-win="Ctrl+Shift+E" data-linux="Ctrl+Shift+E" title="macOS: ⇧⌘E, Linux: Ctrl+Shift+E">Ctrl+Shift+E</span>) in the side bar of VS Code:</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/file-explorer-mingw.png" alt="File Explorer" class="moz-reader-block-img" moz-reader-center="true"></p>
+<p>You can also enable <a href="https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save">Auto Save</a> to automatically save your file changes, by checking <strong>Auto Save</strong> in the main <strong>File</strong> menu.</p>
+<p>The Activity Bar on the far left lets you open different views such as <strong>Search</strong>, <strong>Source Control</strong>, and <strong>Run</strong>. You'll look at the <strong>Run</strong> view later in this tutorial. You can find out more about the other views in the VS Code <a href="https://code.visualstudio.com/docs/getstarted/userinterface">User Interface documentation</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: When you save or open a C++ file, you may see a
+ notification from the C/C++ extension about the availability of an 
+Insiders version, which lets you test new features and fixes. You can 
+ignore this notification by selecting the <code>X</code> (<strong>Clear Notification</strong>).</p>
+</blockquote>
+<h2 id="_explore-intellisense" data-needslink="_explore-intellisense"><a href="#_explore-intellisense">Explore IntelliSense</a></h2>
+<p>In your new <code>helloworld.cpp</code> file, hover over <code>vector</code> or <code>string</code> to see type information. After the declaration of the <code>msg</code> variable, start typing <code>msg.</code>
+ as you would when calling a member function. You should immediately see
+ a completion list that shows all the member functions, and a window 
+that shows the type information for the <code>msg</code> object:</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/msg-intellisense.png" alt="Statement completion IntelliSense" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+<p>You can press the <span>Tab</span> key to insert the selected member;
+ then, when you add the opening parenthesis, you will see information 
+about any arguments that the function requires.</p>
+<h2 id="_run-helloworldcpp" data-needslink="_run-helloworldcpp"><a href="#_run-helloworldcpp">Run helloworld.cpp</a></h2>
+<p>Remember, the C++ extension uses the C++ compiler you have installed 
+on your machine to build your program. Make sure you have a C++ compiler
+ installed before attempting to run and debug <code>helloworld.cpp</code> in VS Code.</p>
+<ol>
+<li>
+<p>Open <code>helloworld.cpp</code> so that it is the active file.</p>
+</li>
+<li>
+<p>Press the play button in the top right corner of the editor.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/run-play-button.png" alt="Screenshot of helloworld.cpp and play button" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+</li>
+<li>
+<p>Choose <strong>C/C++: g++.exe build and debug active file</strong> from the list of detected compilers on your system.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/select-gcc-compiler.png" alt="C++ debug configuration dropdown" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+</li>
+</ol>
+<p>You'll only be asked to choose a compiler the first time you run <code>helloworld.cpp</code>. This compiler will be set as the "default" compiler in <code>tasks.json</code> file.</p>
+<ol start="4">
+<li>
+<p>After the build succeeds, your program's output will appear in the integrated <strong>Terminal</strong>.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/helloworld-terminal-output.png" alt="screenshot of program output" class="moz-reader-block-img" moz-reader-center="true"></p>
+</li>
+</ol>
+<p>The first time you run your program, the C++ extension creates <code>tasks.json</code>, which you'll find in your project's <code>.vscode</code> folder. <code>tasks.json</code> stores build configurations.</p>
+<p>Your new <code>tasks.json</code> file should look similar to the JSON below:</p>
+<pre><code><span><span>{</span></span>
+<span><span>  </span><span>"tasks"</span><span>: [</span></span>
+<span><span>    {</span></span>
+<span><span>      </span><span>"type"</span><span>: </span><span>"cppbuild"</span><span>,</span></span>
+<span><span>      </span><span>"label"</span><span>: </span><span>"C/C++: g++.exe build active file"</span><span>,</span></span>
+<span><span>      </span><span>"command"</span><span>: </span><span>"C:</span><span>\\</span><span>msys64</span><span>\\</span><span>mingw64</span><span>\\</span><span>bin</span><span>\\</span><span>g++.exe"</span><span>,</span></span>
+<span><span>      </span><span>"args"</span><span>: [</span></span>
+<span><span>        </span><span>"-fdiagnostics-color=always"</span><span>,</span></span>
+<span><span>        </span><span>"-g"</span><span>,</span></span>
+<span><span>        </span><span>"${file}"</span><span>,</span></span>
+<span><span>        </span><span>"-o"</span><span>,</span></span>
+<span><span>        </span><span>"${fileDirname}</span><span>\\</span><span>${fileBasenameNoExtension}.exe"</span></span>
+<span><span>      ],</span></span>
+<span><span>      </span><span>"options"</span><span>: {</span></span>
+<span><span>        </span><span>"cwd"</span><span>: </span><span>"${fileDirname}"</span></span>
+<span><span>      },</span></span>
+<span><span>      </span><span>"problemMatcher"</span><span>: [</span><span>"$gcc"</span><span>],</span></span>
+<span><span>      </span><span>"group"</span><span>: {</span></span>
+<span><span>        </span><span>"kind"</span><span>: </span><span>"build"</span><span>,</span></span>
+<span><span>        </span><span>"isDefault"</span><span>: </span><span>true</span></span>
+<span><span>      },</span></span>
+<span><span>      </span><span>"detail"</span><span>: </span><span>"Task generated by Debugger."</span></span>
+<span><span>    }</span></span>
+<span><span>  ],</span></span>
+<span><span>  </span><span>"version"</span><span>: </span><span>"2.0.0"</span></span>
+<span><span>}</span></span>
+<span></span></code></pre>
+<blockquote>
+<p><strong>Note</strong>: You can learn more about <code>tasks.json</code> variables in the <a href="https://code.visualstudio.com/docs/editor/variables-reference">variables reference</a>.</p>
+</blockquote>
+<p>The <code>command</code> setting specifies the program to run; in this case that is g++.
+The <code>args</code> array specifies the command-line arguments that 
+will be passed to g++. These arguments must be specified in the order 
+expected by the compiler.</p>
+<p>This task tells g++ to take the active file (<code>${file}</code>), compile it, and create an executable file in the current directory (<code>${fileDirname}</code>) with the same name as the active file but with the <code>.exe</code> extension (<code>${fileBasenameNoExtension}.exe</code>), resulting in <code>helloworld.exe</code> for our example.</p>
+<p>The <code>label</code> value is what you will see in the tasks list; you can name this whatever you like.</p>
+<p>The <code>detail</code> value is what you will as the description of 
+the task in the tasks list. It's highly recommended to rename this value
+ to differentiate it from similar tasks.</p>
+<p>From now on, the play button will read from <code>tasks.json</code> to figure out how to build and run your program. You can define multiple build tasks in <code>tasks.json</code>,
+ and whichever task is marked as the default will be used by the play 
+button. In case you need to change the default compiler, you can run <strong>Tasks: Configure default build task</strong>. Alternatively you can modify the <code>tasks.json</code> file and remove the default by replacing this segment:</p>
+<pre><code><span><span>    </span><span>"group"</span><span>: {</span></span>
+<span><span>        </span><span>"kind"</span><span>: </span><span>"build"</span><span>,</span></span>
+<span><span>        </span><span>"isDefault"</span><span>: </span><span>true</span></span>
+<span><span>    },</span></span>
+<span></span></code></pre>
+<p>with this:</p>
+<pre><code><span><span>    </span><span>"group"</span><span>: </span><span>"build"</span><span>,</span></span>
+<span></span></code></pre>
+<h3 id="_modifying-tasksjson" data-needslink="_modifying-tasksjson"><a href="#_modifying-tasksjson">Modifying tasks.json</a></h3>
+<p>You can modify your <code>tasks.json</code> to build multiple C++ files by using an argument like <code>"${workspaceFolder}/*.cpp"</code> instead of <code>${file}</code>.This will build all <code>.cpp</code> files in your current folder. You can also modify the output filename by replacing <code>"${fileDirname}\\${fileBasenameNoExtension}.exe"</code> with a hard-coded filename (for example <code>"${workspaceFolder}\\myProgram.exe"</code>).</p>
+<h2 id="_debug-helloworldcpp" data-needslink="_debug-helloworldcpp"><a href="#_debug-helloworldcpp">Debug helloworld.cpp</a></h2>
+<ol>
+<li>Go back to <code>helloworld.cpp</code> so that it is the active file.</li>
+<li>Set a breakpoint by clicking on the editor margin or using F9 on the current line.
+<img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/cpp-breakpoint.png" alt="screenshot of breakpoint in helloworld.cpp"></li>
+<li>From the drop-down next to the play button, select <strong>Debug C/C++ File</strong>.
+<img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/run-debug-arrow.png" alt="Screenshot of play button drop-down">
+<img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/debug-cpp-file-play-button.png" alt="Screenshot of play button drop-down"></li>
+<li>Choose <strong>C/C++: g++ build and debug active file</strong> from the list of detected compilers on your system (you'll only be asked to choose a compiler the first time you run/debug <code>helloworld.cpp</code>).
+<img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/select-gcc-compiler.png" alt="C++ debug configuration dropdown"></li>
+</ol>
+<p>The play button has two modes: <strong>Run C/C++ File</strong> and <strong>Debug C/C++ File</strong>.
+ It will default to the last-used mode. If you see the debug icon in the
+ play button, you can just click the play button to debug, instead of 
+using the drop-down.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/debug-button.png" alt="screenshot of play button in debug mode" class="moz-reader-block-img"></p>
+<h2 id="_explore-the-debugger" data-needslink="_explore-the-debugger"><a href="#_explore-the-debugger">Explore the debugger</a></h2>
+<p>Before you start stepping through the code, let's take a moment to notice several changes in the user interface:</p>
+<ul>
+<li>
+<p>The Integrated Terminal appears at the bottom of the source code editor. In the <strong>Debug Output</strong> tab, you see output that indicates the debugger is up and running.</p>
+</li>
+<li>
+<p>The editor highlights the line where you set a breakpoint before starting the debugger:</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/breakpoint-debug.png" alt="Initial breakpoint" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+</li>
+<li>
+<p>The <strong>Run and Debug</strong> view on the left shows debugging information. You'll see an example later in the tutorial.</p>
+</li>
+<li>
+<p>At the top of the code editor, a debugging control panel appears. You
+ can move this around the screen by grabbing the dots on the left side.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/debug-controls.png" alt="Debugging controls" class="moz-reader-block-img"></p>
+</li>
+</ul>
+<h2 id="_step-through-the-code" data-needslink="_step-through-the-code"><a href="#_step-through-the-code">Step through the code</a></h2>
+<p>Now you're ready to start stepping through the code.</p>
+<ol>
+<li>
+<p>Click or press the <strong>Step over</strong> icon in the debugging control panel.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/step-over-button.png" alt="Step over button" class="moz-reader-block-img"></p>
+<p>This will advance program execution to the first line of the for loop, and skip over all the internal function calls within the <code>vector</code> and <code>string</code> classes that are invoked when the <code>msg</code> variable is created and initialized. Notice the change in the <strong>Variables</strong> window on the left.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/debug-view-variables.png" alt="Debugging windows" class="moz-reader-block-img"></p>
+<p>In this case, the errors are expected because, although the variable 
+names for the loop are now visible to the debugger, the statement has 
+not executed yet, so there is nothing to read at this point. The 
+contents of <code>msg</code> are visible, however, because that statement has completed.</p>
+</li>
+<li>
+<p>Press <strong>Step over</strong> again to advance to the next 
+statement in this program (skipping over all the internal code that is 
+executed to initialize the loop). Now, the <strong>Variables</strong> window shows information about the loop variables.</p>
+</li>
+<li>
+<p>Press <strong>Step over</strong> again to execute the <code>cout</code> statement. (Note that as of the March 2019 release, the C++ extension does not print any output to the <strong>Debug Console</strong> until the loop exits.)</p>
+</li>
+<li>
+<p>If you like, you can keep pressing <strong>Step over</strong> until all the words in the vector have been printed to the console. But if you are curious, try pressing the <strong>Step Into</strong> button to step through source code in the C++ standard library!</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/gcc-system-header-stepping.png" alt="Breakpoint in gcc standard library header" class="moz-reader-block-img"></p>
+<p>To return to your own code, one way is to keep pressing <strong>Step over</strong>. Another way is to set a breakpoint in your code by switching to the <code>helloworld.cpp</code> tab in the code editor, putting the insertion point somewhere on the <code>cout</code> statement inside the loop, and pressing <span data-commandid="editor.debug.action.toggleBreakpoint" data-osx="F9" data-win="F9" data-linux="F9" title="macOS: F9, Linux: F9">F9</span>. A red dot appears in the gutter on the left to indicate that a breakpoint has been set on this line.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/breakpoint-in-main.png" alt="Breakpoint in main" class="moz-reader-block-img"></p>
+<p>Then press <span data-commandid="workbench.action.debug.start" data-osx="F5" data-win="F5" data-linux="F5" title="macOS: F5, Linux: F5">F5</span> to start execution from the current line in the standard library header. Execution will break on <code>cout</code>. If you like, you can press <span data-commandid="editor.debug.action.toggleBreakpoint" data-osx="F9" data-win="F9" data-linux="F9" title="macOS: F9, Linux: F9">F9</span> again to toggle off the breakpoint.</p>
+<p>When the loop has completed, you can see the output in the Integrated
+ Terminal, along with some other diagnostic information that is output 
+by GDB.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/mingw-debug-output.png" alt="Debug output in terminal" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+</li>
+</ol>
+<h2 id="_set-a-watch" data-needslink="_set-a-watch"><a href="#_set-a-watch">Set a watch</a></h2>
+<p>Sometimes you might want to keep track of the value of a variable as your program executes. You can do this by setting a <strong>watch</strong> on the variable.</p>
+<ol>
+<li>
+<p>Place the insertion point inside the loop. In the <strong>Watch</strong> window, click the plus sign and in the text box, type <code>word</code>, which is the name of the loop variable. Now view the Watch window as you step through the loop.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/watch-window.png" alt="Watch window" class="moz-reader-block-img"></p>
+</li>
+<li>
+<p>Add another watch by adding this statement before the loop: <code>int i = 0;</code>. Then, inside the loop, add this statement: <code>++i;</code>. Now add a watch for <code>i</code> as you did in the previous step.</p>
+</li>
+<li>
+<p>To quickly view the value of any variable while execution is paused 
+on a breakpoint, you can hover over it with the mouse pointer.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/mouse-hover.png" alt="Mouse hover" class="moz-reader-block-img"></p>
+</li>
+</ol>
+<h2 id="_customize-debugging-with-launchjson" data-needslink="_customize-debugging-with-launchjson"><a href="#_customize-debugging-with-launchjson">Customize debugging with launch.json</a></h2>
+<p>When you debug with the play button or <span data-commandid="workbench.action.debug.start" data-osx="F5" data-win="F5" data-linux="F5" title="macOS: F5, Linux: F5">F5</span>, the C++ extension creates a dynamic debug configuration on the fly.</p>
+<p>There are cases where you'd want to customize your debug 
+configuration, such as specifying arguments to pass to the program at 
+runtime. You can define custom debug configurations in a <code>launch.json</code> file.</p>
+<p>To create <code>launch.json</code>, choose <strong>Add Debug Configuration</strong> from the play button drop-down menu.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/add-debug-configuration.png" alt="Add debug configuration play button menu" class="moz-reader-block-img"></p>
+<p>You'll then see a dropdown for various predefined debugging configurations. Choose <strong>C/C++: g++.exe build and debug active file</strong>.</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/select-gcc-compiler.png" alt="C++ debug configuration dropdown" class="moz-reader-block-img" moz-reader-full-width="true" moz-reader-center="true"></p>
+<p>VS Code creates a <code>launch.json</code> file, which looks something like this:</p>
+<pre><code><span><span>{</span></span>
+<span><span>  </span><span>"version"</span><span>: </span><span>"0.2.0"</span><span>,</span></span>
+<span><span>  </span><span>"configurations"</span><span>: [</span></span>
+<span><span>    {</span></span>
+<span><span>      </span><span>"name"</span><span>: </span><span>"C/C++: g++.exe build and debug active file"</span><span>,</span></span>
+<span><span>      </span><span>"type"</span><span>: </span><span>"cppdbg"</span><span>,</span></span>
+<span><span>      </span><span>"request"</span><span>: </span><span>"launch"</span><span>,</span></span>
+<span><span>      </span><span>"program"</span><span>: </span><span>"${fileDirname}</span><span>\\</span><span>${fileBasenameNoExtension}.exe"</span><span>,</span></span>
+<span><span>      </span><span>"args"</span><span>: [],</span></span>
+<span><span>      </span><span>"stopAtEntry"</span><span>: </span><span>false</span><span>,</span></span>
+<span><span>      </span><span>"cwd"</span><span>: </span><span>"${fileDirname}"</span><span>,</span></span>
+<span><span>      </span><span>"environment"</span><span>: [],</span></span>
+<span><span>      </span><span>"externalConsole"</span><span>: </span><span>false</span><span>,</span></span>
+<span><span>      </span><span>"MIMode"</span><span>: </span><span>"gdb"</span><span>,</span></span>
+<span><span>      </span><span>"miDebuggerPath"</span><span>: </span><span>"C:</span><span>\\</span><span>msys64</span><span>\\</span><span>mingw64</span><span>\\</span><span>bin</span><span>\\</span><span>gdb.exe"</span><span>,</span></span>
+<span><span>      </span><span>"setupCommands"</span><span>: [</span></span>
+<span><span>        {</span></span>
+<span><span>          </span><span>"description"</span><span>: </span><span>"Enable pretty-printing for gdb"</span><span>,</span></span>
+<span><span>          </span><span>"text"</span><span>: </span><span>"-enable-pretty-printing"</span><span>,</span></span>
+<span><span>          </span><span>"ignoreFailures"</span><span>: </span><span>true</span></span>
+<span><span>        }</span></span>
+<span><span>      ],</span></span>
+<span><span>      </span><span>"preLaunchTask"</span><span>: </span><span>"C/C++: g++.exe build active file"</span></span>
+<span><span>    }</span></span>
+<span><span>  ]</span></span>
+<span><span>}</span></span>
+<span></span></code></pre>
+<p>In the JSON above, <code>program</code> specifies the program you want to debug. Here it is set to the active file folder (<code>${fileDirname}</code>) and active filename with the <code>.exe</code> extension (<code>${fileBasenameNoExtension}.exe</code>), which if <code>helloworld.cpp</code> is the active file will be <code>helloworld.exe</code>. The <code>args</code> property is an array of arguments to pass to the program at runtime.</p>
+<p>By default, the C++ extension won't add any breakpoints to your source code and the <code>stopAtEntry</code> value is set to <code>false</code>.</p>
+<p>Change the <code>stopAtEntry</code> value to <code>true</code> to cause the debugger to stop on the <code>main</code> method when you start debugging.</p>
+<blockquote>
+<p>From now on, the play button and <span data-commandid="workbench.action.debug.start" data-osx="F5" data-win="F5" data-linux="F5" title="macOS: F5, Linux: F5">F5</span> will read from your <code>launch.json</code> file when launching your program for debugging.</p>
+</blockquote>
+<h2 id="_cc-configurations" data-needslink="_cc-configurations"><a href="#_cc-configurations">C/C++ configurations</a></h2>
+<p>If you want more control over the C/C++ extension, you can create a <code>c_cpp_properties.json</code>
+ file, which will allow you to change settings such as the path to the 
+compiler, include paths, C++ standard (default is C++17), and more.</p>
+<p>You can view the C/C++ configuration UI by running the command <strong>C/C++: Edit Configurations (UI)</strong> from the Command Palette (<span data-commandid="workbench.action.showCommands" data-osx="⇧⌘P" data-win="Ctrl+Shift+P" data-linux="Ctrl+Shift+P" title="macOS: ⇧⌘P, Linux: Ctrl+Shift+P">Ctrl+Shift+P</span>).</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/command-palette.png" alt="Command Palette" class="moz-reader-block-img" moz-reader-center="true"></p>
+<p>This opens the <strong>C/C++ Configurations</strong> page. When you make changes here, VS Code writes them to a file called <code>c_cpp_properties.json</code> in the <code>.vscode</code> folder.</p>
+<p>Here, we've changed the <strong>Configuration name</strong> to <strong>GCC</strong>, set the <strong>Compiler  path</strong> dropdown to the g++ compiler, and the <strong>IntelliSense mode</strong> to match the compiler (<strong>gcc-x64</strong>).</p>
+<p><img src="Get%20Started%20with%20C++%20and%20Mingw-w64%20in%20Visual%20Studio%20Code_arquivos/intellisense-configurations-mingw.png" alt="Command Palette" class="moz-reader-block-img" moz-reader-center="true"></p>
+<p>Visual Studio Code places these settings in <code>.vscode\c_cpp_properties.json</code>. If you open that file directly, it should look something like this:</p>
+<pre><code><span><span>{</span></span>
+<span><span>  </span><span>"configurations"</span><span>: [</span></span>
+<span><span>    {</span></span>
+<span><span>      </span><span>"name"</span><span>: </span><span>"GCC"</span><span>,</span></span>
+<span><span>      </span><span>"includePath"</span><span>: [</span><span>"${workspaceFolder}/**"</span><span>],</span></span>
+<span><span>      </span><span>"defines"</span><span>: [</span><span>"_DEBUG"</span><span>, </span><span>"UNICODE"</span><span>, </span><span>"_UNICODE"</span><span>],</span></span>
+<span><span>      </span><span>"windowsSdkVersion"</span><span>: </span><span>"10.0.18362.0"</span><span>,</span></span>
+<span><span>      </span><span>"compilerPath"</span><span>: </span><span>"C:/msys64/mingw64/bin/g++.exe"</span><span>,</span></span>
+<span><span>      </span><span>"cStandard"</span><span>: </span><span>"c17"</span><span>,</span></span>
+<span><span>      </span><span>"cppStandard"</span><span>: </span><span>"c++17"</span><span>,</span></span>
+<span><span>      </span><span>"intelliSenseMode"</span><span>: </span><span>"windows-gcc-x64"</span></span>
+<span><span>    }</span></span>
+<span><span>  ],</span></span>
+<span><span>  </span><span>"version"</span><span>: </span><span>4</span></span>
+<span><span>}</span></span>
+<span></span></code></pre>
+<p>You only need to add to the <strong>Include path</strong> array setting if your program includes header files that are not in your workspace or in the standard library path.</p>
+<h3 id="_compiler-path" data-needslink="_compiler-path"><a href="#_compiler-path">Compiler path</a></h3>
+<p>The extension uses the <code>compilerPath</code> setting to infer the
+ path to the C++ standard library header files. When the extension knows
+ where to find those files, it can provide features like smart 
+completions and <strong>Go to Definition</strong> navigation.</p>
+<p>The C/C++ extension attempts to populate <code>compilerPath</code> 
+with the default compiler location based on what it finds on your 
+system. The extension looks in several common compiler locations.</p>
+<p>The <code>compilerPath</code> search order is:</p>
+<ul>
+<li>First check for the Microsoft Visual C++ compiler</li>
+<li>Then look for g++ on Windows Subsystem for Linux (WSL)</li>
+<li>Then g++ for Mingw-w64.</li>
+</ul>
+<p>If you have Visual Studio or WSL installed, you may need to change <code>compilerPath</code>
+ to match the preferred compiler for your project. For example, if you 
+installed Mingw-w64 version 8.1.0 using the i686 architecture, Win32 
+threading, and sjlj exception handling install options, the path would 
+look like this: <code>C:\Program Files (x86)\mingw-w64\i686-8.1.0-win32-sjlj-rt_v6-rev0\mingw64\bin\g++.exe</code>.</p>
+<h2 id="_troubleshooting" data-needslink="_troubleshooting"><a href="#_troubleshooting">Troubleshooting</a></h2>
+<h3 id="_msys2-is-installed-but-g-and-gdb-are-still-not-found" data-needslink="_msys2-is-installed-but-g-and-gdb-are-still-not-found"><a href="#_msys2-is-installed-but-g-and-gdb-are-still-not-found">MSYS2 is installed, but g++ and gdb are still not found</a></h3>
+<p>You must follow the steps on the <a href="https://www.msys2.org/" target="_blank">MSYS2 website</a>
+ and use the MSYS CLI to install Mingw-w64, which contains those tools. 
+You will also need to install the full Mingw-w64 toolchain (<code>pacman -S --needed base-devel mingw-w64-x86_64-toolchain</code>) to get the <code>gdb</code> debugger.</p>
+<h3 id="_mingw-32bit" data-needslink="_mingw-32bit"><a href="#_mingw-32bit">MinGW 32-bit</a></h3>
+<p>If you need a 32-bit version of the MinGW toolset, consult the <a href="https://www.msys2.org/wiki/MSYS2-installation/" target="_blank">Downloading</a> section on the MSYS2 wiki. It includes links to both 32-bit and 64-bit installation options.</p>
+<h2 id="_next-steps" data-needslink="_next-steps"><a href="#_next-steps">Next steps</a></h2>
+<ul>
+<li>Explore the <a href="https://code.visualstudio.com/docs/editor/codebasics">VS Code User Guide</a>.</li>
+<li>Review the <a href="https://code.visualstudio.com/docs/languages/cpp">Overview of the C++ extension</a>.</li>
+<li>Create a new workspace, copy your <code>.vscode</code> JSON files to it, adjust the necessary settings for the new workspace path, program name, and so on, and start coding!</li>
+</ul>
+
+            
+            
+            <p>5/13/2022</p>
+            
+        </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+    <div aria-owns="toolbar"></div>
+  </div>
+
+  <div id="pocket-cta-container" hidden="">
+    <div class="pocket-cta-inner" id="pocket-cta-only">
+      <div class="pocket-cta">
+        <header class="pocket-cta-header">Save anything from across the web in Pocket, your personal library.</header>
+        <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket provides a quiet, calm space that’s perfect for reading. It 
+strips away all the distractions of the internet so you can really 
+focus.</p>
+        <a href="https://getpocket.com/signup?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-sign-up"><strong>Sign up</strong> - it’s free</a>
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-discover-more"><strong>Discover more</strong></a>
+      </div>
+      <button class="pocket-dismiss-cta" title="Dismiss"></button>
+    </div>
+
+    <div class="pocket-cta-inner" id="pocket-cta-and-recs">
+      <div class="pocket-recs-top">
+        <div class="col">
+          <header class="pocket-cta-header">Discover the most thought-provoking stories out there, curated by Pocket.</header>
+          <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket surfaces the best articles out there—new perspectives, intriguing
+ deep-dives, timeless classics—and we do this with the same dedication 
+to privacy you’ve come to expect from Firefox and Mozilla. </p>
+        </div>
+        <div class="col">
+          <button class="pocket-collapse-recs"></button>
+        </div>
+      </div>
+
+      <div class="pocket-recs"></div>
+
+      <div class="pocket-sign-up-wrapper">
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_plus_recs" class="pocket-btn pocket-sign-up"><strong>Discover more</strong></a>
+      </div>
+    </div>
+  </div>
+
+
+
+</body></html>
