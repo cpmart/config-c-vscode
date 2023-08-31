@@ -1,4 +1,4 @@
-# Condifuração do VSCode para compilar C
+# Configuração do VSCode para compilar C
 
 ## Windows
 
